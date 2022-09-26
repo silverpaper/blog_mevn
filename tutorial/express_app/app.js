@@ -3,14 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var mongoose = require('mongoose');
 
 var app = express();
 
+// connect to mongodb
+mongoose.connect('mongodb://localhost:27017/express_app', function() {
+  console.log('Connection has been made');
+})
+.catch(err => {
+  console.error('App starting error:', err.stack);
+  process.exit(1);
+});
+
+ 
+
 // Require file system module
 var fs = require('file-system');
+const User = require('./routes/models/users');
 
 // Include controllers
 fs.readdirSync('controllers').forEach(function (file) {
@@ -22,7 +32,7 @@ fs.readdirSync('controllers').forEach(function (file) {
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
