@@ -1,3 +1,5 @@
+const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -7,5 +9,15 @@ const UserSchema = new Schema({
   email: String
 })
 
-const User = mongoose.model("User", UserSchema)
+const User = mongoose.model("User", UserSchema);
+
 module.exports = User
+
+
+
+
+
+
+
+
+

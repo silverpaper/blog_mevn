@@ -1,9 +1,12 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+// var createError = require('http-errors');
 
 var app = express();
 
@@ -16,11 +19,11 @@ mongoose.connect('mongodb://localhost:27017/express_app', function() {
   process.exit(1);
 });
 
- 
 
 // Require file system module
 var fs = require('file-system');
-const User = require('./routes/models/users');
+// const User = require('./models/Users');
+
 
 // Include controllers
 fs.readdirSync('controllers').forEach(function (file) {
@@ -58,6 +61,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 app.listen(3000, function() {console.log('listening on 3000')})
 
